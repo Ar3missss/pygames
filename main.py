@@ -39,12 +39,12 @@ while not game_over:
         if event.type == pygame.QUIT:
             sys.exit()
 
-        keys = pygame.key.get_pressed()
-        if keys [pygame.K_LEFT] and PLAYER.x - SPEED_X >=0:
-            PLAYER.x -= SPEED_X
+    keys = pygame.key.get_pressed()
+    if keys [pygame.K_LEFT] and PLAYER.x - SPEED_X >=0:
+        PLAYER.x -= SPEED_X
                      
-        elif keys [pygame.K_RIGHT] and PLAYER.x + SPEED_X + PLAYER.width<=WIDTH:
-            PLAYER.x += SPEED_X
+    elif keys [pygame.K_RIGHT] and PLAYER.x + SPEED_X + PLAYER.width<=WIDTH:
+        PLAYER.x += SPEED_X
     
     spawn_timer += dt        
     if spawn_timer > spawn_delay:
