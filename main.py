@@ -33,8 +33,7 @@ spawn_delay = 2000
 while not game_over: 
     dt=clock.tick(60)
     clock.tick(30)
-    SCORE += 1
-    SPEED_Y = 5 + SCORE // 100
+    SPEED_Y = 5 + SCORE // 5
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -60,6 +59,7 @@ while not game_over:
         enemy.y += SPEED_Y
 
         if enemy.y > HEIGHT:
+            SCORE += 1
             enemy.y = 0
             enemy.x = random.randint(0, WIDTH-50)
            
