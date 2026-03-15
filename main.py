@@ -15,6 +15,7 @@ SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
 CAPTION = pygame.display.set_caption('Dodge Blocks')
 PLAYER=pygame.Rect(WIDTH/2,HEIGHT-50,50,50)
 SCORE=0
+LIVES=3
 ENEMIES=[]
 NUM_ENEMY=5
 for _ in range (NUM_ENEMY):
@@ -65,13 +66,29 @@ while not game_over:
            
         # Collison
         if PLAYER.colliderect(enemy):
-            print("Game Over")
-            game_over=True 
+            LIVES -= 1
+            if LIVES <= 0:
+                print("Game Over")
+                game_over=True 
+            else:
+                # Reset player position and enemies to give a fresh start after losing a life
+                PLAYER.x = WIDTH / 2
+                PLAYER.y = HEIGHT - 50
+                ENEMIES = []
+                for _ in range(NUM_ENEMY):
+                    x = random.randint(0, WIDTH - 50)
+                    y = -random.randint(50, 600) # Start enemies at different heights
+                    enemy_rect = pygame.Rect(x, y, 50, 50)
+                    ENEMIES.append(enemy_rect)
+                spawn_timer = 0
+                break # Exit the enemy loop to restart the frame
  
           
     SCREEN.fill(BACKGROUND_COLOR)   
     score_text = font.render(f"Score: {SCORE}", True, (255,255,255))
+    lives_text = font.render(f"Lives: {LIVES}", True, (255,255,255))
     SCREEN.blit(score_text, (10,10))
+    SCREEN.blit(lives_text, (WIDTH - 120, 10))
     for enemy in ENEMIES:
         pygame.draw.rect(SCREEN,RED,enemy)    
             
